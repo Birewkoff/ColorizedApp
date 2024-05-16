@@ -25,23 +25,28 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         colorBord.layer.cornerRadius = 20.0
+        
         redSetupSlider()
         greenSetupSlider()
         blueSetupSlider()
         setupNumberForLabel()
+        updateColor()
     }
     
     // MARK: - IB Action
     @IBAction func redSliderAction() {
         redLabelForNumbers.text = String(format: "%.2f", redSlider.value)
+        updateColor()
     }
     
     @IBAction func greenSliderAction() {
         greenLabelForNumbers.text = String(format: "%.2f", greenSlider.value)
+        updateColor()
     }
     
     @IBAction func blueSliderAction() {
         blueLabelForNumbers.text = String(format: "%.2f", blueSlider.value)
+        updateColor()
     }
     
     // MARK: - Privat Func
@@ -70,6 +75,16 @@ final class ViewController: UIViewController {
         blueSlider.minimumValue = 0
         blueSlider.maximumValue = 1
         blueSlider.minimumTrackTintColor = .blue
+    }
+    
+    private func updateColor() {
+        let red = CGFloat(redSlider.value)
+        let green = CGFloat(greenSlider.value)
+        let blue = CGFloat(blueSlider.value)
+        
+        let newColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        
+        colorBord.backgroundColor = newColor
     }
 }
 
